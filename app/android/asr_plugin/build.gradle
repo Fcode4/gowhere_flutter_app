@@ -1,0 +1,58 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+//需要在asr_plugin引入flutter包，虽然主程序的build.gradle中已经存在flutter,但在asr插件中的.java文件并没有去找主程序中的flutter包
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+apply plugin: 'com.android.library'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+flutter {
+    source '../..'
+}
+
+
+dependencies {
+//    也是导入百度语音文件
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //导入百度语音
+    implementation files('libs/bdasr_V3_20201116_93b546d.jar')
+}
