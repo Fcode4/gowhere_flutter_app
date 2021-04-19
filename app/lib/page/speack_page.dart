@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:app/page/search_page.dart';
+import 'package:app/plugin/asr_manager.dart';
 import 'package:flutter/material.dart';
 
 double _boxheight = 100;
@@ -12,6 +14,8 @@ class _SpeackPageState extends State<SpeackPage>
     with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
+  String speakTips = '长按说话';
+  String speakResult = '';
   @override
   void initState() {
     controller =
@@ -38,14 +42,44 @@ class _SpeackPageState extends State<SpeackPage>
   // 不传e会报错
   _speackStart(e) {
     print('按下');
+    setState(() {
+      speakTips = '-识别中-';
+    });
+    controller.forward();
+    AsrManager.start()
+        .then((text) => {
+              if (text != null && text.length > 0)
+                {
+                  setState(() {
+                    speakResult = text;
+                  }),
+                  // Navigator.pop(context),
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              SearchPage(keyWord: text, backIcon: true)))
+                }
+            })
+        .catchError((e) => {print('错误=====${e.toString()}')});
   }
 
   _speackStop(e) {
-    print('抬起');
+    setState(() {
+      speakTips = '长按说话';
+    });
+    controller.reset();
+    controller.stop();
+    AsrManager.stop();
   }
 
   _speackCancel() {
-    print('取消');
+    setState(() {
+      speakTips = '长按说话';
+    });
+    controller.reset();
+    controller.stop();
+    AsrManager.stop();
   }
 
   @override
@@ -99,18 +133,24 @@ class _SpeackPageState extends State<SpeackPage>
               child: Column(
             children: [
               Text(
-                '长按说话',
+                speakTips,
                 style: TextStyle(color: Colors.blue, height: 3, fontSize: 18),
               ),
-              GestureDetector(
-                  onTapDown: _speackStart,
-                  onTapUp: _speackStop,
-                  onTapCancel: _speackCancel,
-                  child: Container(
+              Stack(
+                children: [
+                  Container(
                     height: _boxheight,
                     width: _boxheight,
+                  ),
+                  Center(
+                      child: GestureDetector(
+                    onTapDown: _speackStart,
+                    onTapUp: _speackStop,
+                    onTapCancel: _speackCancel,
                     child: AnimatedMic(animation: animation),
                   ))
+                ],
+              )
             ],
           )),
         ),
@@ -127,8 +167,9 @@ class _SpeackPageState extends State<SpeackPage>
 
 // 录音按钮
 class AnimatedMic extends AnimatedWidget {
-  static final _opacityTween = Tween(begin: 1, end: 0.5);
-  static final _sizeTween = Tween(begin: _boxheight, end: _boxheight - 20);
+  static final _opacityTween = Tween<double>(begin: 1, end: 0.5);
+  static final _sizeTween =
+      Tween<double>(begin: _boxheight, end: _boxheight - 20);
   AnimatedMic({Key key, Animation<double> animation})
       : super(key: key, listenable: animation);
   @override
@@ -136,7 +177,11 @@ class AnimatedMic extends AnimatedWidget {
     final Animation<double> animation = listenable;
     return Opacity(
       opacity: _opacityTween.evaluate(animation),
+      // opacity: 1,
       child: Container(
+        margin: EdgeInsets.only(
+            // 线性动画，在一个区间数值内线性变换.evaluate方法会返回一个具体的值
+            top: Tween<double>(begin: 0, end: 10).evaluate(animation)),
         height: _sizeTween.evaluate(animation),
         width: _sizeTween.evaluate(animation),
         decoration: BoxDecoration(

@@ -10,15 +10,17 @@ class SearchBar extends StatefulWidget {
   bool isHome;
   bool backIcon;
   String defauleText;
+  String keyWord;
   int searchBgcolor = 0xffcccccc;
   double opacity;
   final Function resCallback;
   SearchBar(
       {this.isHome = false,
       this.backIcon = false,
-      this.defauleText = '',
+      this.defauleText,
       this.opacity = 0,
-      this.resCallback});
+      this.resCallback,
+      this.keyWord});
   @override
   _SearchBarState createState() => _SearchBarState();
 }
@@ -29,6 +31,18 @@ class _SearchBarState extends State<SearchBar> {
 //设置节流周期为390毫秒
   Duration durationTime = Duration(milliseconds: 390);
   TextEditingController textController = TextEditingController();
+  @override
+  void initState() {
+    if (widget.keyWord != null) {
+      setState(() {
+        // 回填输入框文字
+        textController.text = widget.keyWord;
+        _onChanged(widget.keyWord);
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,7 +98,7 @@ class _SearchBarState extends State<SearchBar> {
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(5, 12, 5, 12),
                             border: InputBorder.none,
-                            hintText: widget.defauleText,
+                            hintText: widget.defauleText ?? '',
                             hintStyle: TextStyle(fontSize: 16)),
                       )),
                 ),

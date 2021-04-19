@@ -21,7 +21,8 @@ const TYPES = [
 
 class SearchPage extends StatefulWidget {
   final bool backIcon;
-  SearchPage({this.backIcon = false});
+  final String keyWord;
+  SearchPage({this.backIcon = false, this.keyWord});
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -39,7 +40,10 @@ class _SearchPageState extends State<SearchPage> {
           EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
       child: Column(children: [
         SearchBar(
-            opacity: 1, resCallback: _resCallback, backIcon: widget.backIcon),
+            opacity: 1,
+            resCallback: _resCallback,
+            backIcon: widget.backIcon,
+            keyWord: widget.keyWord),
         Expanded(
             child: MediaQuery.removePadding(
                 removeTop: true, context: context, child: _searchList(context)))
