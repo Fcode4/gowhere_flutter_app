@@ -30,7 +30,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Map<String, dynamic> salesBox;
   Map<String, dynamic> gridNav;
+  // 滚动监听
   ScrollController controller = ScrollController(initialScrollOffset: 0);
+
   _onScroll(scrollOffset) {
     double searchBoxOpt;
     int changeBgColor;
@@ -53,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     controller.addListener(() {
       _onScroll(controller.offset);
     });
+
     this._setTabBar();
     fetchData();
     super.initState();

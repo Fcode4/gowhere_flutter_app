@@ -28,7 +28,6 @@ class SalesBox extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(10, 1, 8, 1),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    // color: Colors.blue,
                     gradient: LinearGradient(
                         colors: [Color(0xffff4e63), Color(0xffff6cc9)])),
                 child: GestureDetector(
@@ -41,9 +40,18 @@ class SalesBox extends StatelessWidget {
                                   url: salesBox['moreUrl'],
                                   hideAppBar: false)));
                     },
-                    child: Text(
-                      '获取更多福利>',
-                      style: TextStyle(color: Colors.white),
+                    child: Row(
+                      children: [
+                        Text(
+                          '获取更多福利',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_right,
+                          color: Colors.white,
+                          size: 14,
+                        )
+                      ],
                     )),
               )
             ],

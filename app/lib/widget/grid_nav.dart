@@ -1,4 +1,5 @@
 import 'package:app/components/web_view.dart';
+import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 
 class GridNav extends StatelessWidget {
@@ -67,15 +68,23 @@ class GridNav extends StatelessWidget {
   Widget _rowItem(item, context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        NavigatorUtil.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => WebView(
-                      title: item['title'],
-                      url: item['url'],
-                      statusBarColor: item['statusBarColor'],
-                      hideAppBar: item['hideAppBar'] ?? true,
-                    )));
+            WebView(
+              title: item['title'],
+              url: item['url'],
+              statusBarColor: item['statusBarColor'],
+              hideAppBar: item['hideAppBar'] ?? true,
+            ));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => WebView(
+        //               title: item['title'],
+        //               url: item['url'],
+        //               statusBarColor: item['statusBarColor'],
+        //               hideAppBar: item['hideAppBar'] ?? true,
+        //             )));
       },
       child: Container(
         padding: EdgeInsets.all(5),
@@ -108,15 +117,18 @@ class GridNav extends StatelessWidget {
         widthFactor: 1,
         child: GestureDetector(
             onTap: () {
-              Navigator.push(
+              NavigatorUtil.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => WebView(
-                            title: element['title'],
-                            url: element['url'],
-                            statusBarColor: element['statusBarColor'],
-                            hideAppBar: element['hideAppBar'] ?? true,
-                          )));
+                  WebView(
+                    title: element['title'],
+                    url: element['url'],
+                    statusBarColor: element['statusBarColor'],
+                    hideAppBar: element['hideAppBar'] ?? true,
+                  ));
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => ));
             },
             child: Container(
                 height: 44,

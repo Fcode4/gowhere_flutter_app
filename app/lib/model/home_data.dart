@@ -327,14 +327,7 @@ class NewItem1 {
   String statusBarColor;
   bool hideAppBar;
 
-  Item1({this.title, this.url, this.statusBarColor, this.hideAppBar});
 
-  Item1.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    url = json['url'];
-    statusBarColor = json['statusBarColor'];
-    hideAppBar = json['hideAppBar'];
-  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
