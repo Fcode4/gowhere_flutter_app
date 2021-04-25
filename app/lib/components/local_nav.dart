@@ -1,4 +1,5 @@
 import 'package:app/components/web_view.dart';
+import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 
 //导航nav组件
@@ -25,15 +26,14 @@ class LocalNav extends StatelessWidget {
   Widget _items(element, context) {
     return GestureDetector(
         onTap: () {
-          Navigator.push(
+          NavigatorUtil.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => WebView(
-                        title: element['title'],
-                        url: element['url'],
-                        statusBarColor: element['statusBarColor'],
-                        hideAppBar: element['hideAppBar'],
-                      )));
+              WebView(
+                title: element['title'],
+                url: element['url'],
+                statusBarColor: element['statusBarColor'],
+                hideAppBar: element['hideAppBar'],
+              ));
         },
         child: Column(
           children: [

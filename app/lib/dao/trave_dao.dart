@@ -57,6 +57,7 @@ class TraveData {
     fixedParams['pagePara']['pageIndex'] = pageIndex;
     // post请求参数需要用jsonEncode转Map传送，有点类似仿前端formdata传送
     fixedParams['pagePara']['pageSize'] = pageSize;
+    print('参数${fixedParams.toString()}');
     final res = await http.post(tab_url, body: jsonEncode(fixedParams));
     if (res.statusCode == 200) {
       Utf8Decoder utf8decoder = Utf8Decoder();

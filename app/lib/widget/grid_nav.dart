@@ -76,15 +76,6 @@ class GridNav extends StatelessWidget {
               statusBarColor: item['statusBarColor'],
               hideAppBar: item['hideAppBar'] ?? true,
             ));
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => WebView(
-        //               title: item['title'],
-        //               url: item['url'],
-        //               statusBarColor: item['statusBarColor'],
-        //               hideAppBar: item['hideAppBar'] ?? true,
-        //             )));
       },
       child: Container(
         padding: EdgeInsets.all(5),
@@ -125,10 +116,6 @@ class GridNav extends StatelessWidget {
                     statusBarColor: element['statusBarColor'],
                     hideAppBar: element['hideAppBar'] ?? true,
                   ));
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => ));
             },
             child: Container(
                 height: 44,

@@ -1,4 +1,5 @@
 import 'package:app/components/web_view.dart';
+import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 
 class SalesBox extends StatelessWidget {
@@ -32,13 +33,12 @@ class SalesBox extends StatelessWidget {
                         colors: [Color(0xffff4e63), Color(0xffff6cc9)])),
                 child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      NavigatorUtil.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => WebView(
-                                  title: '活动',
-                                  url: salesBox['moreUrl'],
-                                  hideAppBar: false)));
+                          WebView(
+                              title: '活动',
+                              url: salesBox['moreUrl'],
+                              hideAppBar: false));
                     },
                     child: Row(
                       children: [
@@ -101,11 +101,8 @@ class SalesBox extends StatelessWidget {
     print('测试重复构建？');
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    WebView(title: '', url: path, hideAppBar: false)));
+        NavigatorUtil.push(
+            context, WebView(title: '', url: path, hideAppBar: false));
       },
       child: Container(
         decoration: BoxDecoration(

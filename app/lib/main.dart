@@ -1,7 +1,11 @@
 import 'package:app/page/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays(
+      [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   runApp(MyApp());
 }
 
@@ -14,10 +18,11 @@ class MyApp extends StatelessWidget {
       builder: (context, AsyncSnapshot snapshot) {
         // 启动时显示
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(home: Splash());
+          return MaterialApp(debugShowCheckedModeBanner: false, home: Splash());
         } else {
           // 时间过后显示
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'go_where',
             theme: ThemeData(
               primarySwatch: Colors.blue,
@@ -37,7 +42,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset('images/welcome.jpg'),
+        child: Image.asset('images/welcome.png'),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:app/components/loading_container.dart';
 import 'package:app/components/web_view.dart';
 import 'package:app/dao/trave_dao.dart';
+import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -35,6 +36,12 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   _fetchData({fetchMore = false}) {
     if (fetchMore) {
       pageIndex++;
@@ -66,13 +73,12 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
       onTap: () {
         if (item['article']['urls'] != null &&
             item['article']['urls'].length > 0) {
-          Navigator.push(
+          NavigatorUtil.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => WebView(
-                      title: '详情',
-                      url: item['article']['urls'][0]['h5Url'],
-                      hideAppBar: false)));
+              WebView(
+                  title: '详情',
+                  url: item['article']['urls'][0]['h5Url'],
+                  hideAppBar: false));
         }
       },
       child: PhysicalModel(

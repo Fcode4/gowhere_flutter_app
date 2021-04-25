@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:app/dao/search_dao.dart';
 import 'package:app/page/search_page.dart';
 import 'package:app/page/speack_page.dart';
+import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 
 enum SearchType { home, searchPage, homeLight }
@@ -84,11 +85,7 @@ class _SearchBarState extends State<SearchBar> {
                 Expanded(
                   child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    SearchPage(backIcon: true)));
+                        NavigatorUtil.push(context, SearchPage(backIcon: true));
                       },
                       child: TextField(
                         enabled: !widget.isHome,
@@ -150,8 +147,8 @@ class _SearchBarState extends State<SearchBar> {
           textController.clear();
           _onChanged('');
         } else {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SpeackPage()));
+          NavigatorUtil.push(context, SearchPage());
+
           print('点击');
         }
       },

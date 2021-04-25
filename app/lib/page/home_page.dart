@@ -14,7 +14,9 @@ import 'dart:ui';
 
 class MyHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() {
+    return _MyHomePageState();
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -111,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
             setState(() {
               activeTabBar = index;
             });
+            opacity = 0;
           },
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Color(0xffff66000),

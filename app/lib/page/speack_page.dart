@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:app/page/search_page.dart';
 import 'package:app/plugin/asr_manager.dart';
+import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 
 double _boxheight = 100;
@@ -54,11 +55,8 @@ class _SpeackPageState extends State<SpeackPage>
                     speakResult = text;
                   }),
                   // Navigator.pop(context),
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              SearchPage(keyWord: text, backIcon: true)))
+                  NavigatorUtil.push(
+                      context, SearchPage(keyWord: text, backIcon: true))
                 }
             })
         .catchError((e) => {print('错误=====${e.toString()}')});

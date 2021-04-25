@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:app/components/web_view.dart';
+import 'package:app/utils/navigator_util.dart';
 import 'package:app/widget/search_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -71,13 +72,10 @@ class _SearchPageState extends State<SearchPage> {
     if (listData == null || listData.length == 0) return null;
     return GestureDetector(
         onTap: () {
-          Navigator.push(
+          NavigatorUtil.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => WebView(
-                      title: '详情',
-                      url: listData[index]['url'],
-                      hideAppBar: false)));
+              WebView(
+                  title: '详情', url: listData[index]['url'], hideAppBar: false));
         },
         child: Container(
           padding: EdgeInsets.all(10),
