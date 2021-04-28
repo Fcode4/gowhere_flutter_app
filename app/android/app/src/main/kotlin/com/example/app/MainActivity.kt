@@ -12,7 +12,8 @@ import android.view.ViewTreeObserver
 import android.view.WindowManager
 class MainActivity: FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
-        GeneratedPluginRegistrant.registerWith(flutterEngine)
+        // pubget引入插件不动
+       GeneratedPluginRegistrant.registerWith(flutterEngine)
         //flutter sdk >= v1.17.0 时使用下面方法注册自定义plugin
         AsrPlugin.registerWith(this, flutterEngine.dartExecutor.binaryMessenger)
     }

@@ -147,7 +147,7 @@ class _SearchBarState extends State<SearchBar> {
           textController.clear();
           _onChanged('');
         } else {
-          NavigatorUtil.push(context, SearchPage());
+          NavigatorUtil.push(context, SpeackPage());
 
           print('点击');
         }

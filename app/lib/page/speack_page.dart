@@ -54,7 +54,7 @@ class _SpeackPageState extends State<SpeackPage>
                   setState(() {
                     speakResult = text;
                   }),
-                  // Navigator.pop(context),
+                  Navigator.pop(context),
                   NavigatorUtil.push(
                       context, SearchPage(keyWord: text, backIcon: true))
                 }

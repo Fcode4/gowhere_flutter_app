@@ -34,6 +34,7 @@ class _WebViewState extends State<WebView> {
   StreamSubscription<String> _onUrlChanged;
   StreamSubscription<WebViewStateChanged> _onStateChanged;
   StreamSubscription<WebViewHttpError> _onHttpError;
+
   @override
   void initState() {
     flutterWebviewPlugin.close();
@@ -140,9 +141,14 @@ class _WebViewState extends State<WebView> {
                 withLocalStorage: true,
                 hidden: true,
                 initialChild: Container(
-                  color: Colors.white,
+                  color: Colors.black38,
                   child: Center(
-                    child: Text('loading...'),
+                    child: Container(
+                        padding: EdgeInsets.fromLTRB(30, 25, 30, 25),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Text('loading...')),
                   ),
                 ),
               ),

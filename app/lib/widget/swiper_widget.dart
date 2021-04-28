@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:app/components/web_view.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';

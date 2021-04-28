@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays(
-      [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     return FutureBuilder(
       // 设置首屏图时间
       future: Future.delayed(Duration(seconds: 3)),
@@ -41,9 +39,13 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.asset('images/welcome.png'),
+        body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Image.asset(
+        'images/welcome.png',
+        fit: BoxFit.cover,
       ),
-    );
+    ));
   }
 }

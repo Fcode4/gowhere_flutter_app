@@ -90,7 +90,8 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
           _itemImage(item),
           Container(
             color: Colors.white,
-            child: Column(children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                 '${item['article']['articleTitle']}',
                 maxLines: 2,
@@ -99,7 +100,7 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
                 style: TextStyle(fontSize: 18),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(5),
                 child: _articleInfo(item),
               )
             ]),
@@ -114,18 +115,17 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               padding: EdgeInsets.only(right: 4),
-              height: 30,
+              height: 50,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
                     item['article']['author']['coverImage']['originalUrl']),
               ),
             ),
             LimitedBox(
-                maxWidth: 100,
+                maxWidth: 50,
                 child: Text(
                   '${item['article']['author']['nickName']}',
                   maxLines: 1,
@@ -134,15 +134,15 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
           ],
         ),
         Row(children: [
-          Icon(
-            Icons.thumb_up,
-            size: 14,
-            color: Colors.black45,
+          Container(
+            margin: EdgeInsets.only(right: 4),
+            child: Icon(
+              Icons.thumb_up,
+              size: 14,
+              color: Colors.black45,
+            ),
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 4),
-            child: Text('${item['article']['likeCount']}'),
-          )
+          Text('${item['article']['likeCount']}'),
         ])
       ],
     );
