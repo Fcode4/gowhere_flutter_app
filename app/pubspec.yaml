@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
 
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
@@ -33,6 +34,12 @@ dependencies:
   flutter_swiper: ^1.1.6
   flutter_staggered_grid_view: ^0.3.0
   provider: 4.3.3
+  permission_handler: 5.1.0
+  lpinyin: ^1.1.0
+  azlistview: ^1.1.0
+  amap_location_flutter_plugin:
+    git:
+      url: https://github.com/amap-demo/amap-location-flutter.git
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +73,8 @@ flutter:
     - images/type_channeltrain.png
     - images/type_cruise.png
     - images/welcome.png
+    - assets/data/china.json
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -105,8 +114,8 @@ flutter_native_splash:
   # of your splash screen to a solid color.  Use background_image to set the background of your
   # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
   # size of the app. Only one parameter can be used, color and background_image cannot both be set.
-  color: "#d5ecc2"
-  # background_image: "images/welcome.png"
+  color: "#ffffff"
+  # background_image: assets/welcome.png
   
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing 
   # the leading # character.

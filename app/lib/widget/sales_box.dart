@@ -98,7 +98,6 @@ class SalesBox extends StatelessWidget {
   }
 
   Widget _item(iconUrl, path, context, bool big, {bool bottomBorder = false}) {
-    print('测试重复构建？');
     return GestureDetector(
       onTap: () {
         NavigatorUtil.push(

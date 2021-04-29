@@ -23,9 +23,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List tabPage = [HomeWidget(), SearchPage(), TravelPage(), MyPage()];
+    List<Widget> tabPage = [HomeWidget(), SearchPage(), TravelPage(), MyPage()];
     return Scaffold(
       body: tabPage[activeTabBar],
+      // webview页面不会隐藏，因为页面没有dispose,他总在其他元素之上
+      // body: IndexedStack(index: activeTabBar, children: tabPage),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: activeTabBar,
           onTap: (index) {
@@ -34,8 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Color(0xffff66000),
-          unselectedItemColor: Color(0xff000000),
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Color(0xff888888),
           items: tabarItems),
     );
   }

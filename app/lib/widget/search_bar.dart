@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'package:app/dao/search_dao.dart';
+import 'package:app/page/city_select.dart';
 import 'package:app/page/search_page.dart';
 import 'package:app/page/speack_page.dart';
+import 'package:app/store/public.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum SearchType { home, searchPage, homeLight }
 
@@ -14,6 +17,7 @@ class SearchBar extends StatefulWidget {
   String keyWord;
   int searchBgcolor = 0xffcccccc;
   double opacity;
+
   final Function resCallback;
   SearchBar(
       {this.isHome = false,
@@ -26,38 +30,44 @@ class SearchBar extends StatefulWidget {
   _SearchBarState createState() => _SearchBarState();
 }
 
+Color lableColor;
+
 class _SearchBarState extends State<SearchBar> {
   bool iscontent = false;
   Timer _timer;
 //设置节流周期为390毫秒
   Duration durationTime = Duration(milliseconds: 390);
   TextEditingController textController = TextEditingController();
-  @override
-  void initState() {
-    if (widget.keyWord != null) {
-      setState(() {
-        // 回填输入框文字
-        textController.text = widget.keyWord;
-        _onChanged(widget.keyWord);
-      });
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+    Color lableColor =
+        Color(widget.opacity == 1 ? 0xff000000 : widget.searchBgcolor);
     return Container(
       padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Row(
         children: [
           Container(
             child: widget.isHome
-                ? Text(
-                    '成都',
-                    style: TextStyle(
-                        color: Color(widget.opacity == 1
-                            ? 0xff000000
-                            : widget.searchBgcolor)),
+                ? GestureDetector(
+                    onTap: () {
+                      print('手动选择11');
+                      NavigatorUtil.push(context, CitySelectRoute());
+                    },
+                    child: Row(children: [
+                      LimitedBox(
+                          maxWidth: 60,
+                          child: Text(
+                            '${Provider.of<PublicState>(context).cityCh}',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: lableColor),
+                          )),
+                      Icon(
+                        Icons.location_on,
+                        color: lableColor,
+                        size: 18,
+                      )
+                    ]),
                   )
                 : widget.backIcon
                     ? GestureDetector(
@@ -107,9 +117,7 @@ class _SearchBarState extends State<SearchBar> {
             child: widget.isHome
                 ? Icon(
                     Icons.message,
-                    color: Color(widget.opacity == 1
-                        ? 0xff000000
-                        : widget.searchBgcolor),
+                    color: lableColor,
                   )
                 : Text('搜索'),
             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -148,8 +156,6 @@ class _SearchBarState extends State<SearchBar> {
           _onChanged('');
         } else {
           NavigatorUtil.push(context, SpeackPage());
-
-          print('点击');
         }
       },
       child: iscontent

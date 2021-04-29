@@ -1,15 +1,20 @@
 import 'package:app/page/home_page.dart';
+import 'package:app/page/home_widget.dart';
+import 'package:app/store/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays(
+      [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     return FutureBuilder(
       // 设置首屏图时间
       future: Future.delayed(Duration(seconds: 3)),
@@ -19,14 +24,24 @@ class MyApp extends StatelessWidget {
           return MaterialApp(debugShowCheckedModeBanner: false, home: Splash());
         } else {
           // 时间过后显示
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'go_where',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (_) => Opt(),
+              ),
+              ChangeNotifierProvider(
+                create: (_) => PublicState(),
+              )
+            ],
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'go_where',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+              ),
+              home: MyHomePage(),
             ),
-            home: MyHomePage(),
           );
         }
       },
