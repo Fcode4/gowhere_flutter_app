@@ -3,6 +3,7 @@ import 'package:app/page/search_page.dart';
 import 'package:app/plugin/asr_manager.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 double _boxheight = 100;
 
@@ -42,7 +43,6 @@ class _SpeackPageState extends State<SpeackPage>
 
   // 不传e会报错
   _speackStart(e) {
-    print('按下');
     setState(() {
       speakTips = '-识别中-';
     });
@@ -82,15 +82,18 @@ class _SpeackPageState extends State<SpeackPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(15),
-        margin:
-            EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
-        decoration: BoxDecoration(color: Color(0xffffffff)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [_tips(), _downSpeack()],
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        body: Container(
+          padding: EdgeInsets.all(15),
+          margin: EdgeInsets.only(
+              top: MediaQueryData.fromWindow(window).padding.top),
+          decoration: BoxDecoration(color: Color(0xffffffff)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [_tips(), _downSpeack()],
+          ),
         ),
       ),
     );

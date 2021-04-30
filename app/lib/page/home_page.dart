@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:app/page/search_page.dart';
 import 'dart:ui';
 
+import 'package:flutter/services.dart';
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() {
@@ -24,21 +26,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> tabPage = [HomeWidget(), SearchPage(), TravelPage(), MyPage()];
-    return Scaffold(
-      body: tabPage[activeTabBar],
-      // webview页面不会隐藏，因为页面没有dispose,他总在其他元素之上
-      // body: IndexedStack(index: activeTabBar, children: tabPage),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: activeTabBar,
-          onTap: (index) {
-            setState(() {
-              activeTabBar = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Color(0xff888888),
-          items: tabarItems),
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        body: tabPage[activeTabBar],
+        // webview页面不会隐藏，因为页面没有dispose,他总在其他元素之上
+        // body: IndexedStack(index: activeTabBar, children: tabPage),
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: activeTabBar,
+            onTap: (index) {
+              setState(() {
+                activeTabBar = index;
+              });
+            },
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Color(0xff888888),
+            items: tabarItems),
+      ),
     );
   }
 

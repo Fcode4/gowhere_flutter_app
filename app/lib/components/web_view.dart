@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class WebView extends StatefulWidget {
@@ -129,31 +130,37 @@ class _WebViewState extends State<WebView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            _appbar(),
-            Expanded(
-              child: WebviewScaffold(
-                url: widget.url,
-                withZoom: true,
-                withLocalStorage: true,
-                hidden: true,
-                initialChild: Container(
-                  color: Colors.black38,
-                  child: Center(
-                    child: Container(
-                        padding: EdgeInsets.fromLTRB(30, 25, 30, 25),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(6)),
-                        child: Text('loading...')),
+    return AnnotatedRegion(
+      value:
+          (widget.statusBarColor == 'ffffff' || widget.statusBarColor == null)
+              ? SystemUiOverlayStyle.dark
+              : SystemUiOverlayStyle.light,
+      child: Scaffold(
+        body: Container(
+          child: Column(
+            children: [
+              _appbar(),
+              Expanded(
+                child: WebviewScaffold(
+                  url: widget.url,
+                  withZoom: true,
+                  withLocalStorage: true,
+                  hidden: true,
+                  initialChild: Container(
+                    color: Colors.black38,
+                    child: Center(
+                      child: Container(
+                          padding: EdgeInsets.fromLTRB(30, 25, 30, 25),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(6)),
+                          child: Text('loading...')),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

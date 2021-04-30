@@ -30,7 +30,6 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         _fetchData(fetchMore: true);
-        print('到底了');
       }
     });
     super.initState();
@@ -64,7 +63,6 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
       setState(() {
         _loading = false;
       });
-      print("$e");
     });
   }
 
@@ -118,7 +116,7 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
           children: [
             Container(
               padding: EdgeInsets.only(right: 4),
-              height: 50,
+              height: 24,
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
                     item['article']['author']['coverImage']['originalUrl']),

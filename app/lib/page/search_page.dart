@@ -3,6 +3,7 @@ import 'package:app/components/web_view.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:app/widget/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 const TYPES = [
   'channelgroup',

@@ -6,6 +6,7 @@ import 'package:app/page/speack_page.dart';
 import 'package:app/store/public.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 enum SearchType { home, searchPage, homeLight }
@@ -43,6 +44,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     Color lableColor =
         Color(widget.opacity == 1 ? 0xff000000 : widget.searchBgcolor);
+
     return Container(
       padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Row(
@@ -51,7 +53,6 @@ class _SearchBarState extends State<SearchBar> {
             child: widget.isHome
                 ? GestureDetector(
                     onTap: () {
-                      print('手动选择11');
                       NavigatorUtil.push(context, CitySelectRoute());
                     },
                     child: Row(children: [
