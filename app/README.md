@@ -1,6 +1,6 @@
 # app
 
-A new Flutter project.
+本软件，基于flutter:1.22.1开发，暂未支持ios端
 
 ## Getting Started
 
