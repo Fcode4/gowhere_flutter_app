@@ -2,15 +2,8 @@
 
 基于flutter:1.22.1开发，暂未支持ios端
 
-## Getting Started
+## start
+1、下载项目代码
+2、执行flutter packages get(不保证其他sdk版本下安装成功)
+3、执行flutter run
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
