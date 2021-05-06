@@ -41,6 +41,18 @@ class _SearchBarState extends State<SearchBar> {
   TextEditingController textController = TextEditingController();
 
   @override
+  void initState() {
+    if (widget.keyWord != null) {
+      setState(() {
+        // 回填输入框文字
+        textController.text = widget.keyWord;
+        _onChanged(widget.keyWord);
+      });
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Color lableColor =
         Color(widget.opacity == 1 ? 0xff000000 : widget.searchBgcolor);

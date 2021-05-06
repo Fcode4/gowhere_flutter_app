@@ -13,10 +13,11 @@ class AppBar_widget extends StatefulWidget {
 class AppBarWidgetState extends State<AppBar_widget> {
   @override
   Widget build(BuildContext context) {
+    SystemUiOverlayStyle _systemUiOverlayStyle = widget.opacity == 1
+        ? SystemUiOverlayStyle.dark
+        : SystemUiOverlayStyle.light;
     return AnnotatedRegion(
-      value: widget.opacity == 1
-          ? SystemUiOverlayStyle.dark
-          : SystemUiOverlayStyle.light,
+      value: _systemUiOverlayStyle,
       child: Column(
         children: [
           Container(
