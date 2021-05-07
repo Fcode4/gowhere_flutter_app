@@ -4,8 +4,10 @@ import 'package:app/page/travel_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/page/search_page.dart';
 import 'dart:ui';
-
 import 'package:flutter/services.dart';
+
+///推送
+import 'package:jpush_flutter/jpush_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -17,10 +19,36 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<BottomNavigationBarItem> tabarItems;
   int activeTabBar = 0;
+  String debugLable = 'Unknown'; /*错误信息*/
+  final JPush jpush = new JPush(); /* 初始化极光插件*/
   @override
   void initState() {
+    _setJgOpction();
     this._setTabBar();
     super.initState();
+  }
+
+  _setJgOpction() {
+    /// 配置jpush(不要省略）
+    ///debug就填debug:true，生产环境production:true
+    jpush.setup(
+        appKey: 'a6640541f76553a08e4ced5c',
+        channel: 'developer-default',
+        production: false,
+        debug: true);
+
+    /// 监听jpush
+    jpush.applyPushAuthority(
+        new NotificationSettingsIOS(sound: true, alert: true, badge: true));
+    jpush.addEventHandler(
+      onReceiveNotification: (Map<String, dynamic> message) async {
+        print(message);
+      },
+      onOpenNotification: (Map<String, dynamic> message) async {
+        /// 点击通知栏消息，在此时通常可以做一些页面跳转等
+        print('===========================${message.toString()}');
+      },
+    );
   }
 
   @override

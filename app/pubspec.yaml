@@ -37,6 +37,9 @@ dependencies:
   permission_handler: 5.1.0
   lpinyin: ^1.1.0
   azlistview: ^1.1.0
+  # 极光
+  # jverify: 2.0.5
+  jpush_flutter: 0.6.3
   amap_location_flutter_plugin:
     git:
       url: https://github.com/amap-demo/amap-location-flutter.git
@@ -123,7 +126,7 @@ flutter_native_splash:
 
   # The image parameter allows you to specify an image used in the splash screen.  It must be a 
   # png file.  
-  image: assets/welcome.png
+  image: images/app_logo.png
 
   # The color_dark, background_image_dark, and image_dark are parameters that set the background
   # and image when the device is in dark mode. If they are not specified, the app will use the

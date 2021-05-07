@@ -36,21 +36,26 @@ class _SearchPageState extends State<SearchPage> {
   TextStyle keyWordStyle = TextStyle(color: Colors.orange, fontSize: 18);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-      padding:
-          EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
-      child: Column(children: [
-        SearchBar(
-            opacity: 1,
-            resCallback: _resCallback,
-            backIcon: widget.backIcon,
-            keyWord: widget.keyWord),
-        Expanded(
-            child: MediaQuery.removePadding(
-                removeTop: true, context: context, child: _searchList(context)))
-      ]),
-    ));
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+          body: Container(
+        padding:
+            EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
+        child: Column(children: [
+          SearchBar(
+              opacity: 1,
+              resCallback: _resCallback,
+              backIcon: widget.backIcon,
+              keyWord: widget.keyWord),
+          Expanded(
+              child: MediaQuery.removePadding(
+                  removeTop: true,
+                  context: context,
+                  child: _searchList(context)))
+        ]),
+      )),
+    );
   }
 
   _resCallback(Map res) {

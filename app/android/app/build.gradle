@@ -50,13 +50,13 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.app"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         ndk {
-             abiFilters "arm64-v8a", "x86_64", "x86"//只打包flutter支持的so
-        //   abiFilters "arm64-v8a"//减小包体积，只打包一种就行
+            //  abiFilters "arm64-v8a", "x86_64", "x86"//只打包flutter支持的so
+          abiFilters "arm64-v8a"//减小包体积，只打包一种就行
         }
 //百度语音集成添加
         packagingOptions {
@@ -68,6 +68,13 @@ android {
             pickFirst 'lib/arm64-v8a/libapp.so'
             pickFirst 'lib/armeabi-v7a/libapp.so'
         }
+
+        // 极光推送
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: "com.example.app",
+                JPUSH_APPKEY : "a6640541f76553a08e4ced5c", /*NOTE: JPush 上注册的包名对应的 Appkey.*/
+                JPUSH_CHANNEL: "developer-default", /*暂时填写默认值即可.*/
+        ]
 
     }
 

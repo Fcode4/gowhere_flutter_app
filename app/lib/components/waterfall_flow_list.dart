@@ -149,7 +149,9 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
   _itemImage(item) {
     return Stack(
       children: [
-        Image.network(_imageUrl(item)),
+        Image.network(
+          _imageUrl(item),
+        ),
         Positioned(
             left: 4,
             bottom: 8,
