@@ -73,6 +73,7 @@ flutter:
     - images/type_channeltrain.png
     - images/type_cruise.png
     - images/welcome.png
+    - images/app_logo.png
     - assets/data/china.json
 
 

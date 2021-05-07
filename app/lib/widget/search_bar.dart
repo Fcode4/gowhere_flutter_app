@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:app/dao/search_dao.dart';
+import 'package:app/page/ass_login.dart';
 import 'package:app/page/city_select.dart';
 import 'package:app/page/search_page.dart';
 import 'package:app/page/speack_page.dart';
 import 'package:app/store/public.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 enum SearchType { home, searchPage, homeLight }
@@ -128,9 +128,12 @@ class _SearchBarState extends State<SearchBar> {
           )),
           Container(
             child: widget.isHome
-                ? Icon(
-                    Icons.message,
-                    color: lableColor,
+                ? GestureDetector(
+                    onTap: () => {NavigatorUtil.push(context, AssLogin())},
+                    child: Icon(
+                      Icons.message,
+                      color: lableColor,
+                    ),
                   )
                 : Text('搜索'),
             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
