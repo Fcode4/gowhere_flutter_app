@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'utils/android_back_desktop.dart';
+
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setEnabledSystemUIOverlays(
@@ -43,7 +45,13 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.blue,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
               ),
-              home: MyHomePage(),
+              home: WillPopScope(
+                onWillPop: () async {
+                  AndroidBackTop.backDeskTop(); //设置为返回不退出app
+                  return false; //一定要return false
+                },
+                child: MyHomePage(),
+              ),
             ),
           );
         }
