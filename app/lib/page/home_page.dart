@@ -41,9 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
     jpush.applyPushAuthority(
         new NotificationSettingsIOS(sound: true, alert: true, badge: true));
     jpush.addEventHandler(
+      //通知类消息,极光后台发送和本地都会接收到
       onReceiveNotification: (Map<String, dynamic> message) async {
-        print(message);
+        print('通知类${message}');
       },
+
+      //推送点击监听
       onOpenNotification: (Map<String, dynamic> message) async {
         /// 点击通知栏消息，在此时通常可以做一些页面跳转等
         print('===========================${message.toString()}');
