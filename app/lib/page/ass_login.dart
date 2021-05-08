@@ -18,7 +18,9 @@ class _AssLoginState extends State<AssLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      appBar: AppBar(
+          // backgroundColor: Colors.transparent
+          ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
