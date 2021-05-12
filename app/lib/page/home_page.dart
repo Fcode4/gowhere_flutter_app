@@ -1,6 +1,7 @@
 import 'package:app/page/home_widget.dart';
 import 'package:app/page/my_page.dart';
 import 'package:app/page/travel_page.dart';
+import 'package:app/page/trip_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/page/search_page.dart';
 import 'dart:ui';
@@ -56,7 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> tabPage = [HomeWidget(), SearchPage(), TravelPage(), MyPage()];
+    List<Widget> tabPage = [
+      HomeWidget(),
+      SearchPage(),
+      TripPage(),
+      TravelPage(),
+      MyPage()
+    ];
     return AnnotatedRegion(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -82,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List tabbar = [
       {'label': '首页', 'icon': Icons.home},
       {'label': '搜索', 'icon': Icons.search},
+      {'label': '行程', 'icon': Icons.storage},
       {'label': '旅拍', 'icon': Icons.local_see},
       {'label': '我的', 'icon': Icons.person},
     ];

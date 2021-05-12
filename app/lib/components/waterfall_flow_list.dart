@@ -147,16 +147,23 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
   }
 
   _itemImage(item) {
+    final size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        Image.network(
-          _imageUrl(item),
-        ),
+        Container(
+            //设置最小初始高度，防止动态图片高度时的抖动
+            constraints: BoxConstraints(minHeight: size.width / 2 - 10),
+            color: Color(0xffffffff),
+            child: Image.network(
+              _imageUrl(item),
+            )),
         Positioned(
             left: 4,
             bottom: 8,
             child: RawChip(
-              labelStyle: TextStyle(color: Colors.white),
+              labelStyle: TextStyle(
+                color: Colors.white,
+              ),
               labelPadding: EdgeInsets.fromLTRB(0, 0, 10, 0),
               backgroundColor: Colors.black87,
               avatar: CircleAvatar(
@@ -168,10 +175,10 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
                 ),
               ),
               label: LimitedBox(
-                  maxWidth: 130,
+                  maxWidth: 100,
                   child: Text(
                     _labelText(item),
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(fontSize: 12),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   )),
