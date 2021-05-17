@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Widget> tabPage = [
       HomeWidget(),
       SearchPage(),
-      TripPage(),
+      // TripPage(),
       TravelPage(),
       MyPage()
     ];
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
     List tabbar = [
       {'label': '首页', 'icon': Icons.home},
       {'label': '搜索', 'icon': Icons.search},
-      {'label': '行程', 'icon': Icons.storage},
+      // {'label': '行程', 'icon': Icons.storage},
       {'label': '旅拍', 'icon': Icons.local_see},
       {'label': '我的', 'icon': Icons.person},
     ];

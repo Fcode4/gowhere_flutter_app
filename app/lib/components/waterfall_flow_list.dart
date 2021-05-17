@@ -4,6 +4,7 @@ import 'package:app/dao/trave_dao.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 const int pageSize = 10;
 
@@ -153,10 +154,10 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
         Container(
             //设置最小初始高度，防止动态图片高度时的抖动
             constraints: BoxConstraints(minHeight: size.width / 2 - 10),
-            color: Color(0xffffffff),
-            child: Image.network(
-              _imageUrl(item),
-            )),
+            child: new FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: _imageUrl(item),
+                fit: BoxFit.cover)),
         Positioned(
             left: 4,
             bottom: 8,

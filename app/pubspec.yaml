@@ -41,7 +41,7 @@ dependencies:
   # 极光
   # jverify: 2.0.5
   jpush_flutter: 0.6.3
-  # flutter_spinkit: "^4.1.2"
+  transparent_image: 1.0.0
   amap_location_flutter_plugin:
     git:
       url: https://github.com/amap-demo/amap-location-flutter.git
