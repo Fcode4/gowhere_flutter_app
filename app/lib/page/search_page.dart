@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:app/components/web_view.dart';
+import 'package:app/utils/cusBehavior.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:app/widget/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -66,12 +67,17 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget _searchList(context) {
-    return ListView.builder(
-      itemCount: listData?.length ?? 0,
-      itemBuilder: (BuildContext context, int index) {
-        return _item(index);
-      },
+    return ScrollConfiguration(
+      behavior: CusBehavior(), // 自定义的 behavior
+      child: ListView.builder(
+        itemCount: listData?.length ?? 0,
+        itemBuilder: (BuildContext context, int index) {
+          return _item(index);
+        },
+      ),
     );
+
+    ;
   }
 
   _item(index) {

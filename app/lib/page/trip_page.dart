@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../store/public.dart';
 
 class TripPage extends StatefulWidget {
   @override
@@ -6,24 +8,21 @@ class TripPage extends StatefulWidget {
 }
 
 class _TripPageState extends State<TripPage> {
+  final Controller c = Get.put(Controller());
   List arr = [
     {'check': true, 'id': 1, 'count': 10},
     {'check': false, 'id': 2, 'count': 3},
     {'check': false, 'id': 3, 'count': 6},
     {'check': false, 'id': 4, 'count': 4},
-  ];
+  ].obs;
   num sum;
   Widget _hander(type, item) {
     return GestureDetector(
       onTap: () {
-        arr.forEach((element) {
-          if (element['id'] == item['id']) {
-            element['count'] += type ? 1 : -1;
-            if (element['count'] < 0) {
-              element['count'] = 0;
-            }
-          }
-        });
+        item['count'] += type ? 1 : -1;
+        if (item['count'] < 0) {
+          item['count'] = 0;
+        }
         _getSum();
         setState(() {
           arr = arr;
@@ -49,6 +48,10 @@ class _TripPageState extends State<TripPage> {
                 _getSum();
               });
             },
+          ),
+          GestureDetector(
+            onTap: c.increment,
+            child: Obx(() => Text('===测试getx:${c.count}')),
           )
         ],
       )
@@ -96,9 +99,10 @@ class _TripPageState extends State<TripPage> {
     arr.forEach((element) {
       init += element['count'];
     });
-    setState(() {
-      sum = init;
-    });
+    sum = init;
+    // setState(() {
+    //   sum = init;
+    // });
   }
 
   @override

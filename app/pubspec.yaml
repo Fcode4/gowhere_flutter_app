@@ -38,6 +38,9 @@ dependencies:
   lpinyin: ^1.1.0
   azlistview: ^1.1.0
   slimy_card: ^ 1.0.4
+  shared_preferences: ^0.5.10
+  m_loading: ^0.0.1
+  get: 3.25.6
   # 极光
   # jverify: 2.0.5
   jpush_flutter: 0.6.3

@@ -33,8 +33,8 @@ class _AssLoginState extends State<AssLogin> {
               width: 200,
             ),
           ),
-          loginBtn('微信登陆', Color(0xff1ecf27), 0xe63d),
-          loginBtn('QQ登陆', Color(0xff0CBBFE), 0xe645),
+          loginBtn('微信登录', Color(0xff1ecf27), 0xe63d),
+          loginBtn('QQ登录', Color(0xff0CBBFE), 0xe645),
           GestureDetector(
             onTap: _clickAbout,
             child: Row(

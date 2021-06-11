@@ -3,25 +3,20 @@ import 'dart:convert';
 import 'package:app/components/local_nav.dart';
 import 'package:app/dao/home_dao.dart';
 import 'package:app/store/public.dart';
+import 'package:app/utils/service.dart';
 import 'package:app/widget/app_bar.dart';
 import 'package:app/widget/grid_nav.dart';
 import 'package:app/widget/sales_box.dart';
 import 'package:app/widget/sub_nav.dart';
 import 'package:app/widget/swiper_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:m_loading/m_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:amap_location_flutter_plugin/amap_location_flutter_plugin.dart';
 import 'package:amap_location_flutter_plugin/amap_location_option.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-// 基于ChangeNotifier使用provider；
-class Opt with ChangeNotifier {
-  double _opacity = 0;
-  void increment(opt) {
-    _opacity = opt;
-    notifyListeners();
-  }
-}
+import '../store/public.dart';
 
 class HomeWidget extends StatefulWidget {
   @override
@@ -29,6 +24,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+  final Controller c = Get.put(Controller());
   int activeTabBar = 0;
   String resStr = '';
   bool loading = true;
@@ -39,32 +35,24 @@ class _HomeWidgetState extends State<HomeWidget> {
   double opacity = 0;
   Map<String, dynamic> salesBox;
   Map<String, dynamic> gridNav;
-  // 之间创建实例，在scroll事件时改变实例中的值；
-  var _optModel = Opt();
   // 滚动监听
   ScrollController controller = ScrollController(initialScrollOffset: 0);
 
   Map<String, Object> _locationResult;
   StreamSubscription<Map<String, Object>> _locationListener;
   AmapLocationFlutterPlugin _locationPlugin = AmapLocationFlutterPlugin();
-
   var _publicStatus;
-
   _onScroll(scrollOffset) {
     double searchBoxOpt;
-    int changeBgColor;
     // searchbar刚好重叠至banner底部时改变透明度
     int possitionOpt = bannerHeight - 50;
     if (scrollOffset >= possitionOpt) {
-      changeBgColor = 0xffcccccc;
       searchBoxOpt = 1;
     } else {
       searchBoxOpt = scrollOffset / possitionOpt;
-      changeBgColor = 0xffffffff;
     }
-    opacity = searchBoxOpt;
-    //直接使用实例的方法改变实例中的值
-    _optModel.increment(searchBoxOpt);
+    //设置getx中的值
+    c.set_opacity(searchBoxOpt);
   }
 
   @override
@@ -101,8 +89,6 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   void dispose() {
-    print('移除监听');
-
     ///移除定位监听
     if (null != _locationListener) {
       _locationListener.cancel();
@@ -119,6 +105,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     // 使用.then方法时return Future<Null> 会无法在onRefresh使用，应该是异步原因造成？
     try {
       Map res = await HomeData.getHomedate();
+
       setState(() {
         resStr = json.encode(res);
         bannerList = res['bannerList'];
@@ -207,7 +194,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       locationOption.fullAccuracyPurposeKey = "AMapLocationScene";
 
       ///设置Android端连续定位的定位间隔
-      locationOption.locationInterval = 2000;
+      // locationOption.locationInterval = 2000;
 
       ///设置Android端的定位模式<br>
       ///可选值：<br>
@@ -243,23 +230,33 @@ class _HomeWidgetState extends State<HomeWidget> {
               child: _listView(),
             ),
           ),
-          // 使用MultiProvider包裹需要局部更新的widget
-          MultiProvider(
-            // 直接使用创建好的实例,最小粒度更新widget,只要_optModel的值改变就会重新打包这个局部widget
-            providers: [ChangeNotifierProvider(create: (_) => _optModel)],
-            child: Consumer<Opt>(
-              builder: (context, optModel, _) {
-                return AppBar_widget(opacity: optModel._opacity);
-              },
-            ),
-          ),
+          //使用getx的observer组件包裹需要局部更新的widget
+          Obx(() => AppBar_widget(opacity: c.navbar_opacity.value))
         ],
       );
     } else {
-      return Container(
-        child: Center(
-          child: Text('加载中...'),
-        ),
+      return Center(
+        // child: Text('加载中...'),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 40,
+                width: 40,
+                child: BallCircleOpacityLoading(
+                  ballStyle: BallStyle(
+                    size: 5,
+                    color: Colors.blue,
+                    ballType: BallType.solid,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Text('加载中...'),
+              )
+            ]),
       );
     }
   }

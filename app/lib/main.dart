@@ -1,17 +1,14 @@
 import 'package:app/page/home_page.dart';
-import 'package:app/page/home_widget.dart';
+import 'package:app/page/my_page.dart';
 import 'package:app/store/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import 'utils/android_back_desktop.dart';
+import 'package:get/get.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setEnabledSystemUIOverlays(
-  //     [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  runApp(MyApp());
+  runApp(GetMaterialApp(home: MyApp()));
   SystemUiOverlayStyle systemUiOverlayStyle =
       SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
@@ -31,9 +28,6 @@ class MyApp extends StatelessWidget {
           // 时间过后显示
           return MultiProvider(
             providers: [
-              ChangeNotifierProvider(
-                create: (_) => Opt(),
-              ),
               ChangeNotifierProvider(
                 create: (_) => PublicState(),
               )

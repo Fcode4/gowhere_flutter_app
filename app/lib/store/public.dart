@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PublicState with ChangeNotifier {
   // 状态栏高度
@@ -20,4 +21,11 @@ class PublicState with ChangeNotifier {
       notifyListeners();
     }
   }
+}
+
+class Controller extends GetxController {
+  var count = 0.obs;
+  final navbar_opacity = 0.0.obs;
+  increment() => count++;
+  set_opacity(opc) => this.navbar_opacity.value = opc;
 }

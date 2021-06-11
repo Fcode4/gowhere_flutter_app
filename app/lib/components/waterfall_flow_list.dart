@@ -1,6 +1,7 @@
 import 'package:app/components/loading_container.dart';
 import 'package:app/components/web_view.dart';
 import 'package:app/dao/trave_dao.dart';
+import 'package:app/utils/cusBehavior.dart';
 import 'package:app/utils/navigator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -220,15 +221,18 @@ class _Waterfall_flow_listState extends State<WaterfallFlowList>
             child: Container(
               padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
               color: Color(0xfff5f5f5),
-              child: StaggeredGridView.countBuilder(
-                controller: _scrollController,
-                crossAxisCount: 4,
-                itemCount: cardList?.length ?? 0,
-                itemBuilder: (BuildContext context, int index) =>
-                    _item(cardList[index]),
-                staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
+              child: ScrollConfiguration(
+                behavior: CusBehavior(),
+                child: StaggeredGridView.countBuilder(
+                  controller: _scrollController,
+                  crossAxisCount: 4,
+                  itemCount: cardList?.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) =>
+                      _item(cardList[index]),
+                  staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
+                ),
               ),
             )),
       ),
