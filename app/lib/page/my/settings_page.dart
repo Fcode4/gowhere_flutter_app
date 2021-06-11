@@ -1,4 +1,3 @@
-import 'package:app/page/my_page.dart';
 import 'package:app/utils/service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
