@@ -25,7 +25,12 @@ class PublicState with ChangeNotifier {
 
 class Controller extends GetxController {
   var count = 0.obs;
+  final userName = '请登录'.obs;
   final navbar_opacity = 0.0.obs;
+  final loaction = Rx<Map<String, dynamic>>({});
+  final testloaction = Rx<Map<String, dynamic>>({});
   increment() => count++;
   set_opacity(opc) => this.navbar_opacity.value = opc;
+  setUsername(name) => this.userName.value = name;
+  setLoaction(loaction) => this.loaction.value = loaction;
 }

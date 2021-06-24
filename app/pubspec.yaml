@@ -41,6 +41,10 @@ dependencies:
   shared_preferences: ^0.5.10
   m_loading: ^0.0.1
   get: 3.25.6
+  flutter_bmflocation: ^1.0.2 
+  flutter_baidu_mapapi_map: ^2.0.1
+  flutter_baidu_mapapi_search: ^2.0.1
+  flutter_baidu_mapapi_utils: ^2.0.1
   # 极光
   # jverify: 2.0.5
   jpush_flutter: 0.6.3

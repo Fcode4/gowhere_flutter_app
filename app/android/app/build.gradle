@@ -107,4 +107,5 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(':asr_plugin')
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
 }

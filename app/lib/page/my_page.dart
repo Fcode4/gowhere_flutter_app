@@ -9,6 +9,8 @@ import 'package:app/utils/service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'my/my_map.dart';
+
 class MyPage extends StatefulWidget {
   MyPage({refresh});
   @override
@@ -25,6 +27,7 @@ class _MyPageState extends State<MyPage> {
     {'icon': Icon(Icons.cloud), 'label': '数据管理'},
     {'icon': Icon(Icons.collections_sharp), 'label': '我的收藏'},
     {'icon': Icon(Icons.autorenew), 'label': '版本信息'},
+    {'icon': Icon(Icons.map), 'label': '地图', 'page': MyMap()},
   ];
   _getStorg() async {
     prefs = await SharedPreferences.getInstance();
@@ -106,10 +109,10 @@ class _MyPageState extends State<MyPage> {
                         ))
                   ],
                 ),
-                background: Image.network(
-                  'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1710%2F08%2Fc23%2F62226714_1507462198518_mthumb.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg',
-                  fit: BoxFit.cover,
-                ),
+                // background: Image.network(
+                //   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fitbbs%2F1710%2F08%2Fc23%2F62226714_1507462198518_mthumb.jpg&refer=http%3A%2F%2Fimg.pconline.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg',
+                //   fit: BoxFit.cover,
+                // ),
               ),
             ),
             SliverFixedExtentList(

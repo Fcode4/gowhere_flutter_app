@@ -32,7 +32,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   List navList;
   List subNavList;
   int bannerHeight = 180;
-  double opacity = 0;
   Map<String, dynamic> salesBox;
   Map<String, dynamic> gridNav;
   // 滚动监听
@@ -57,6 +56,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   void initState() {
+    c.set_opacity(0.0);
     controller.addListener(() {
       _onScroll(controller.offset);
     });
@@ -77,6 +77,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           result['city'] != null &&
           result['city'] != '' &&
           _publicStatus.locking == false) {
+        c.setLoaction(result);
         _publicStatus.setCityCh(result['city']);
       }
       setState(() {

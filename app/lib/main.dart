@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:app/page/home_page.dart';
 import 'package:app/store/public.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,21 @@ import 'package:provider/provider.dart';
 import 'utils/android_back_desktop.dart';
 import 'package:get/get.dart';
 
+import 'package:flutter_baidu_mapapi_base/flutter_baidu_mapapi_base.dart'
+    show BMFMapSDK, BMF_COORD_TYPE;
+
 void main() {
+// 百度地图sdk初始化鉴权
+  WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isIOS) {
+    BMFMapSDK.setApiKeyAndCoordType(
+        'H0sE9IyXS7nQK8pdK18G1chmGy7FTpgD', BMF_COORD_TYPE.BD09LL);
+  } else if (Platform.isAndroid) {
+    // Android 目前不支持接口设置Apikey,
+    // 请在主工程的Manifest文件里设置，详细配置方法请参考官网(https://lbsyun.baidu.com/)demo
+    BMFMapSDK.setCoordType(BMF_COORD_TYPE.BD09LL);
+  }
+
   runApp(GetMaterialApp(home: MyApp()));
   SystemUiOverlayStyle systemUiOverlayStyle =
       SystemUiOverlayStyle(statusBarColor: Colors.transparent);
