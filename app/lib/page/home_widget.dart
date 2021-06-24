@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:app/components/local_nav.dart';
 import 'package:app/dao/home_dao.dart';
 import 'package:app/store/public.dart';
+import 'package:app/utils/cusBehavior.dart';
 import 'package:app/utils/service.dart';
 import 'package:app/widget/app_bar.dart';
 import 'package:app/widget/grid_nav.dart';
@@ -237,7 +238,6 @@ class _HomeWidgetState extends State<HomeWidget> {
       );
     } else {
       return Center(
-        // child: Text('加载中...'),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -253,25 +253,28 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Text('加载中...'),
-              )
+              // Padding(
+              //   padding: EdgeInsets.only(top: 10),
+              //   child: Text('加载中...'),
+              // )
             ]),
       );
     }
   }
 
   Widget _listView() {
-    return ListView(
-      controller: controller,
-      children: [
-        SwiperHome(bannerList: bannerList, bannerHeight: bannerHeight),
-        LocalNav(navList: navList),
-        GridNav(gridNav: gridNav),
-        SubNav(subNavList: subNavList),
-        SalesBox(salesBox: salesBox),
-      ],
+    return ScrollConfiguration(
+      behavior: CusBehavior(),
+      child: ListView(
+        controller: controller,
+        children: [
+          SwiperHome(bannerList: bannerList, bannerHeight: bannerHeight),
+          LocalNav(navList: navList),
+          GridNav(gridNav: gridNav),
+          SubNav(subNavList: subNavList),
+          SalesBox(salesBox: salesBox),
+        ],
+      ),
     );
   }
 }
