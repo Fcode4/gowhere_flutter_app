@@ -45,7 +45,7 @@ class SettingsPage extends StatelessWidget {
                       )),
                       builder: (BuildContext context) {
                         return Container(
-                          height: 100,
+                          height: 180,
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: outputarr
@@ -71,7 +71,10 @@ class SettingsPage extends StatelessWidget {
                                               return;
                                           }
                                         },
-                                        child: Text(e),
+                                        child: Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 10, bottom: 10),
+                                            child: Text(e)),
                                       ))
                                   .toList()),
                         );

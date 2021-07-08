@@ -84,18 +84,18 @@ class _LoginPageState extends State<LoginPage> {
                   if (user_name != null && pass_word != null) {
                     prefs = await SharedPreferences.getInstance();
                     prefs.setString('nick_name', user_name);
-                    GOdialog.showLoading(
-                        context,
-                        BallCircleOpacityLoading(
-                          ballStyle: BallStyle(
-                              size: 5,
-                              color: Colors.blue,
-                              ballType: BallType.solid),
-                        ),
-                        width: 40.0,
-                        height: 40.0);
+                    // GOdialog.showLoading(
+                    //     context,
+                    //     BallCircleOpacityLoading(
+                    //       ballStyle: BallStyle(
+                    //           size: 5,
+                    //           color: Colors.blue,
+                    //           ballType: BallType.solid),
+                    //     ),
+                    //     width: 40.0,
+                    //     height: 40.0);
                     await Future.delayed(Duration(milliseconds: 400));
-                    Navigator.of(context)..pop()..pop(true);
+                    Navigator.of(context).pop(true);
                   } else {
                     Toast.toast(context, msg: "请输入正确的用户名密码！ ");
                   }

@@ -132,7 +132,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     bool hasLocationPermission = await requestLocationPermission();
     if (hasLocationPermission) {
       _startLocation();
-      print("定位权限申请通过");
+      print("定位权限申请通过111");
     } else {
       _publicStatus.setCityCh('定位失败');
       print("定位权限申请不通过");

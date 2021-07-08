@@ -29,3 +29,9 @@
 -keep class io.flutter.view.**  { *; }
 -keep class io.flutter.**  { *; }
 -keep class io.flutter.plugins.**  { *; }
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-keep class com.baidu.vi.** {*;}
+-keep class mapsdkvi.com.** {*;}
+-dontwarn com.baidu.**
+-keep class vi.com.gdi.bgl.android.**{*;}

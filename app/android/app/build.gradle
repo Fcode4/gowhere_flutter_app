@@ -82,15 +82,15 @@ android {
         release {
             keyAlias 'flutter_go_where'
             keyPassword '199504'
-            storeFile file('C:\\Users\\admin\\Desktop\\git_gowhere\\gowhere_flutter_app\\app\\android\\flutter_go_where_store.jks')
+            storeFile file('C:\\Users\\admin\\Desktop\\flutter\\git_gowhere\\gowhere_flutter_app\\app\\android\\flutter_go_where_store.jks')
             storePassword '199504'
         }
     }
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            minifyEnabled true //是否启用代码压缩 需要将targetSdkVersion 和 compileSdkVersion 升级到 28 @https://github.com/flutter/flutter/issues/26860#issuecomment-469751224
-            useProguard true
+            // minifyEnabled true //是否启用代码压缩 需要将targetSdkVersion 和 compileSdkVersion 升级到 28，but百度地图需要关闭混淆，不然release版会闪退 @https://github.com/flutter/flutter/issues/26860#issuecomment-469751224
+            // useProguard true
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 

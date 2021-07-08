@@ -15,6 +15,9 @@ class _MyMapState extends State<MyMap> {
   BMFMapController myMapController;
   BMFMapOptions mapOptions;
 
+  /// 我的位置
+  BMFUserLocation _userLocation;
+
   /// 定位点样式
   BMFUserLocationDisplayParam _displayParam;
 
@@ -22,22 +25,28 @@ class _MyMapState extends State<MyMap> {
   void onBMFMapCreated(BMFMapController controller) {
     myMapController = controller;
 
-    // 显示定位
-    myMapController?.showUserLocation(true);
-    updateLoaction();
-
     myMapController?.showBaseIndoorMap(true);
 
     /// 地图加载回调
     myMapController?.setMapDidLoadCallback(callback: () {
+      // 显示定位必须在callback中执行
+      myMapController?.showUserLocation(true);
+      updateLoaction();
+      updateMap();
       print('mapDidLoad-地图加载完成');
-      print('${c.loaction.value}');
     });
   }
 
   // 位置更新
   updateLoaction() {
-    BMFCoordinate coordinate = BMFCoordinate(39.965, 116.404);
+    double latitude;
+    double longitude;
+    if (c.loaction.value != {}) {
+      latitude = c.loaction.value['latitude'];
+      longitude = c.loaction.value['longitude'];
+    }
+    BMFCoordinate coordinate =
+        BMFCoordinate(latitude ?? 39.965, longitude ?? 116.404);
 
     BMFLocation location = BMFLocation(
         coordinate: coordinate,
@@ -50,9 +59,8 @@ class _MyMapState extends State<MyMap> {
     BMFUserLocation userLocation = BMFUserLocation(
       location: location,
     );
-
-    myMapController?.updateLocationData(userLocation);
-    updateMap();
+    _userLocation = userLocation;
+    myMapController?.updateLocationData(_userLocation);
   }
 
   // 样式更新
@@ -63,10 +71,12 @@ class _MyMapState extends State<MyMap> {
         accuracyCircleFillColor: Colors.red,
         accuracyCircleStrokeColor: Colors.blue,
         isAccuracyCircleShow: true,
+        locationViewImage: 'images/animation_red.png',
         locationViewHierarchy:
             BMFLocationViewHierarchy.LOCATION_VIEW_HIERARCHY_BOTTOM);
     _displayParam = displayParam;
-    myMapController?.updateLocationViewWithParam(displayParam);
+    myMapController?.updateLocationViewWithParam(_displayParam);
+    print('跟新跟新');
   }
 
   @override
