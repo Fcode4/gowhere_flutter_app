@@ -1,9 +1,11 @@
-import 'package:app/store/public.dart';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'models.dart';
 
 class Utils {
+  static double navHeight = MediaQueryData.fromWindow(window).padding.top;
+
   static void showSnackBar(BuildContext context, String msg) {
     Scaffold.of(context).showSnackBar(
       SnackBar(

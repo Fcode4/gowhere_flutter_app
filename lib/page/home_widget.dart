@@ -4,7 +4,6 @@ import 'package:app/components/local_nav.dart';
 import 'package:app/dao/home_dao.dart';
 import 'package:app/store/public.dart';
 import 'package:app/utils/cusBehavior.dart';
-import 'package:app/utils/service.dart';
 import 'package:app/widget/app_bar.dart';
 import 'package:app/widget/grid_nav.dart';
 import 'package:app/widget/sales_box.dart';
@@ -37,8 +36,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   Map<String, dynamic> gridNav;
   // 滚动监听
   ScrollController controller = ScrollController(initialScrollOffset: 0);
-
-  Map<String, Object> _locationResult;
   StreamSubscription<Map<String, Object>> _locationListener;
   AmapLocationFlutterPlugin _locationPlugin = AmapLocationFlutterPlugin();
   var _publicStatus;
@@ -81,9 +78,6 @@ class _HomeWidgetState extends State<HomeWidget> {
         c.setLoaction(result);
         _publicStatus.setCityCh(result['city']);
       }
-      setState(() {
-        _locationResult = result;
-      });
     });
     fetchData();
     super.initState();
@@ -132,10 +126,9 @@ class _HomeWidgetState extends State<HomeWidget> {
     bool hasLocationPermission = await requestLocationPermission();
     if (hasLocationPermission) {
       _startLocation();
-      print("定位权限申请通过111");
+      print("定位权限申请通过");
     } else {
       _publicStatus.setCityCh('定位失败');
-      print("定位权限申请不通过");
     }
   }
 
@@ -238,42 +231,37 @@ class _HomeWidgetState extends State<HomeWidget> {
       );
     } else {
       return Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 40,
-                width: 40,
-                child: BallCircleOpacityLoading(
-                  ballStyle: BallStyle(
-                    size: 5,
-                    color: Colors.blue,
-                    ballType: BallType.solid,
-                  ),
-                ),
-              ),
-              // Padding(
-              //   padding: EdgeInsets.only(top: 10),
-              //   child: Text('加载中...'),
-              // )
-            ]),
+        child: Container(
+          height: 40,
+          width: 40,
+          child: BallCircleOpacityLoading(
+            ballStyle: BallStyle(
+              size: 5,
+              color: Colors.blue,
+              ballType: BallType.solid,
+            ),
+          ),
+        ),
       );
     }
   }
 
   Widget _listView() {
+    List listData = [
+      SwiperHome(bannerList: bannerList, bannerHeight: bannerHeight),
+      LocalNav(navList: navList),
+      GridNav(gridNav: gridNav),
+      SubNav(subNavList: subNavList),
+      SalesBox(salesBox: salesBox),
+    ];
     return ScrollConfiguration(
       behavior: CusBehavior(),
-      child: ListView(
+      child: ListView.builder(
         controller: controller,
-        children: [
-          SwiperHome(bannerList: bannerList, bannerHeight: bannerHeight),
-          LocalNav(navList: navList),
-          GridNav(gridNav: gridNav),
-          SubNav(subNavList: subNavList),
-          SalesBox(salesBox: salesBox),
-        ],
+        itemCount: listData?.length,
+        itemBuilder: (BuildContext context, int index) {
+          return listData[index];
+        },
       ),
     );
   }

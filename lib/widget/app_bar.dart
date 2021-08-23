@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:app/utils/utils.dart';
 import 'package:app/widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +30,8 @@ class AppBarWidgetState extends State<AppBar_widget> {
                       end: Alignment.bottomCenter)),
               child: Container(
                   padding: EdgeInsets.only(
-                      top: MediaQueryData.fromWindow(window).padding.top),
+                    top: Utils.navHeight,
+                  ),
                   decoration: BoxDecoration(
                       color: Color.fromARGB(
                           (widget.opacity * 255).toInt(), 255, 255, 255)),

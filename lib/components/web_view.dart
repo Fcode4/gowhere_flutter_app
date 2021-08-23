@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -81,12 +82,13 @@ class _WebViewState extends State<WebView> {
     if (widget.hideAppBar) {
       return Container(
         color: Color(int.parse('0xff' + statusBarColorStr)),
-        height: MediaQueryData.fromWindow(window).padding.top,
+        height: Utils.navHeight,
       );
     } else {
       return Container(
-        padding:
-            EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
+        padding: EdgeInsets.only(
+          top: Utils.navHeight,
+        ),
         // height: 40,
         color: Color(int.parse('0xff' + statusBarColorStr)),
         child: FractionallySizedBox(

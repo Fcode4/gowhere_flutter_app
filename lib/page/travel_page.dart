@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:app/components/waterfall_flow_list.dart';
 import 'package:app/dao/trave_dao.dart';
+import 'package:app/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class TravelPage extends StatefulWidget {
@@ -77,8 +78,9 @@ class _TravelPageState extends State<TravelPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding:
-            EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
+        padding: EdgeInsets.only(
+          top: Utils.navHeight,
+        ),
         child: Column(children: [_getNav(), _getTabBarView()]),
       ),
     );

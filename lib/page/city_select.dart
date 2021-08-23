@@ -83,7 +83,7 @@ class _CitySelectRouteState extends State<CitySelectRoute> {
           children: <Widget>[
             Container(
                 margin: EdgeInsets.only(
-                  top: MediaQueryData.fromWindow(window).padding.top,
+                  top: Utils.navHeight,
                 ),
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.only(left: 15),

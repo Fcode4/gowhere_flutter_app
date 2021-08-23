@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:app/page/search_page.dart';
 import 'package:app/plugin/asr_manager.dart';
 import 'package:app/utils/navigator_util.dart';
+import 'package:app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -88,7 +89,8 @@ class _SpeackPageState extends State<SpeackPage>
         body: Container(
           padding: EdgeInsets.all(15),
           margin: EdgeInsets.only(
-              top: MediaQueryData.fromWindow(window).padding.top),
+            top: Utils.navHeight,
+          ),
           decoration: BoxDecoration(color: Color(0xffffffff)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

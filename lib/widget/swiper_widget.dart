@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:app/components/web_view.dart';
 import 'package:app/utils/navigator_util.dart';
+import 'package:app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -11,7 +12,7 @@ class SwiperHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: bannerHeight + MediaQueryData.fromWindow(window).padding.top,
+      height: bannerHeight + Utils.navHeight,
       child: bannerList != null
           ? Swiper(
               itemBuilder: (BuildContext context, int index) {

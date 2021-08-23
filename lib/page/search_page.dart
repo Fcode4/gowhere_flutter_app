@@ -2,9 +2,12 @@ import 'dart:ui';
 import 'package:app/components/web_view.dart';
 import 'package:app/utils/cusBehavior.dart';
 import 'package:app/utils/navigator_util.dart';
+import 'package:app/utils/utils.dart';
 import 'package:app/widget/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:keframe/frame_separate_widget.dart';
+import 'package:keframe/size_cache_widget.dart';
 
 const TYPES = [
   'channelgroup',
@@ -41,8 +44,9 @@ class _SearchPageState extends State<SearchPage> {
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
           body: Container(
-        padding:
-            EdgeInsets.only(top: MediaQueryData.fromWindow(window).padding.top),
+        padding: EdgeInsets.only(
+          top: Utils.navHeight,
+        ),
         child: Column(children: [
           SearchBar(
               opacity: 1,
@@ -69,11 +73,20 @@ class _SearchPageState extends State<SearchPage> {
   Widget _searchList(context) {
     return ScrollConfiguration(
       behavior: CusBehavior(), // 自定义的 behavior
-      child: ListView.builder(
-        itemCount: listData?.length ?? 0,
-        itemBuilder: (BuildContext context, int index) {
-          return _item(index);
-        },
+      child: SizeCacheWidget(
+        child: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          itemCount: listData?.length ?? 0,
+          itemBuilder: (BuildContext context, int index) {
+            return FrameSeparateWidget(
+                index: index,
+                placeHolder: Container(
+                  color: Colors.white,
+                  height: 60,
+                ),
+                child: _item(index));
+          },
+        ),
       ),
     );
 

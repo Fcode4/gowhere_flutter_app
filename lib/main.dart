@@ -3,6 +3,7 @@ import 'package:app/page/home_page.dart';
 import 'package:app/store/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:provider/provider.dart';
 import 'utils/android_back_desktop.dart';
 import 'package:get/get.dart';
@@ -60,6 +61,9 @@ class MyApp extends StatelessWidget {
                 },
                 child: MyHomePage(),
               ),
+              builder: (BuildContext context, Widget child) {
+                return FlutterSmartDialog(child: child);
+              },
             ),
           );
         }

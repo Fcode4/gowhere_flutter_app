@@ -1,7 +1,6 @@
-import 'package:app/page/my_page.dart';
 import 'package:app/utils/service.dart';
 import 'package:flutter/material.dart';
-import 'package:m_loading/m_loading.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -79,22 +78,21 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.only(top: 20),
               width: MediaQuery.of(context).size.width * 0.7,
               child: OutlineButton(
+                shape: RoundedRectangleBorder(
+                    side: BorderSide.none,
+                    borderRadius: BorderRadius.all(Radius.circular(50))),
                 child: Text('登录'),
                 onPressed: () async {
                   if (user_name != null && pass_word != null) {
                     prefs = await SharedPreferences.getInstance();
                     prefs.setString('nick_name', user_name);
-                    // GOdialog.showLoading(
-                    //     context,
-                    //     BallCircleOpacityLoading(
-                    //       ballStyle: BallStyle(
-                    //           size: 5,
-                    //           color: Colors.blue,
-                    //           ballType: BallType.solid),
-                    //     ),
-                    //     width: 40.0,
-                    //     height: 40.0);
-                    await Future.delayed(Duration(milliseconds: 400));
+                    //open loading
+                    SmartDialog.showLoading(
+                      msg: '请稍等',
+                    );
+                    //delay off
+                    await Future.delayed(Duration(seconds: 2));
+                    SmartDialog.dismiss();
                     Navigator.of(context).pop(true);
                   } else {
                     Toast.toast(context, msg: "请输入正确的用户名密码！ ");
